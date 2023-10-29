@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+        li {
+            cursor: pointer;
+        }
+        .completed {
+            text-decoration: line-through;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    <form id="task-form">
+        <input type="text" id="task-input" placeholder="Adicione uma tarefa">
+        <button type="submit">Cadastrar</button>
+    </form>
+    <ul id="task-list">
+    </ul>
+
+    <script>
+        $(document).ready(function () {
+            $('#task-form').submit(function (event) {
+                event.preventDefault(); // Impede o envio do formulário padrão.
+
+                const taskName = $('#task-input').val();
+                if (taskName.trim() !== '') {
+                    const listItem = $('<li>' + taskName + '</li>');
+                    $('#task-list').append(listItem);
+
+                    listItem.click(function () {
+                        $(this).toggleClass('completed');
+                    });
+
+                    $('#task-input').val(''); // Limpa o campo de entrada.
+                }
+            });
+        });
+    </script>
+</body>
+</html>
